@@ -18,12 +18,59 @@ background:#0a0a0a;
 color:white;
 }
 
+/* BOTÃO MENU */
+.menu-btn{
+position:fixed;
+top:15px;
+left:15px;
+background:#00ff88;
+color:black;
+padding:10px 15px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+z-index:1000;
+}
+
+/* MENU LATERAL */
+.sidebar{
+position:fixed;
+top:0;
+left:-300px;
+width:300px;
+height:100%;
+background:#111;
+padding:30px 20px;
+transition:0.3s;
+border-right:2px solid #00ff88;
+z-index:999;
+}
+
+.sidebar.ativo{
+left:0;
+}
+
+.sidebar h2{
+color:#00ff88;
+margin-bottom:20px;
+}
+
+.fechar{
+margin-top:20px;
+background:#00ff88;
+border:none;
+padding:10px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
 /* HEADER */
 header{
 background:#111;
 padding:20px;
 display:flex;
-justify-content:space-between;
+justify-content:center;
 align-items:center;
 border-bottom:2px solid #00ff88;
 }
@@ -36,6 +83,8 @@ letter-spacing:2px;
 }
 
 .cart{
+position:absolute;
+right:20px;
 background:#00ff88;
 color:black;
 padding:10px 15px;
@@ -120,6 +169,17 @@ color:#888;
 
 <body>
 
+<!-- BOTÃO MENU -->
+<div class="menu-btn" onclick="abrirMenu()">☰</div>
+
+<!-- MENU LATERAL -->
+<div class="sidebar" id="menu">
+<h2>Suporte</h2>
+<p>📞 WhatsApp: (35) 99891-1405</p>
+
+<button class="fechar" onclick="fecharMenu()">Fechar</button>
+</div>
+
 <header>
 <div class="logo">NETXSHOPE</div>
 <div class="cart" onclick="verCarrinho()">🛒 Carrinho (<span id="qtd">0</span>)</div>
@@ -134,51 +194,69 @@ color:#888;
 
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqTQ2gvjUm45BaAYD-gLTEV8FBDAC3VRJs9f7irHw-6t8erLlbJ2EP3PoA&s=10">
-<h3>mouse gamer K-MEP m136 com fio</h3>
+<h3>Mouse gamer K-MEP m136 com fio</h3>
 <div class="preco">R$ 49.99</div>
-<button onclick="addCarrinho()">Comprar</button>
+<button onclick="comprar('Mouse gamer K-MEP m136 com fio','49.99')">Comprar</button>
 </div>
 
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5Ayaj1eN7MUWUJEG2Y9Bv3lJJBet8YsRdJM71zmxc6A&s">
-<h3>​Mousepad Fortrek Speed 440x350x3mm, 73266-MPG102</h3>
+<h3>Mousepad Fortrek Speed 440x350x3mm</h3>
 <div class="preco">R$ 29.99</div>
-<button onclick="addCarrinho()">Comprar</button>
+<button onclick="comprar('Mousepad Fortrek Speed 440x350x3mm','29.99')">Comprar</button>
 </div>
 
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfOHF2_MF5b0JMojahWgO2W-o4KIp3BOZLDkkSaf0RQw&s=10">
-<h3>Teclado Mecanico Solid Gear Diamond 60, Rainbow, Switch Outemu Vermelho, Preto, T-200</h3>
+<h3>Teclado Mecânico Solid Gear Diamond 60</h3>
 <div class="preco">R$ 139.99</div>
-<button onclick="addCarrinho()">Comprar</button>
+<button onclick="comprar('Teclado Mecânico Solid Gear Diamond 60','139.99')">Comprar</button>
 </div>
 
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj0jNxdFSFEo9fJr8afyRCc69f8Kp9aF3pgbVYhlervA&s">
-<h3>​Mousepad Gamer Fortrek Speed Pro Gaming, Extra Grande, 800x300x4mm, Preto, 77538</h3>
+<h3>Mousepad Gamer Fortrek Speed Pro Gaming</h3>
 <div class="preco">R$ 59.99</div>
-<button onclick="addCarrinho()">Comprar</button>
+<button onclick="comprar('Mousepad Gamer Fortrek Speed Pro Gaming','59.99')">Comprar</button>
 </div>
 
 </section>
 
 <footer>
 © 2026 NETXSHOPE — Todos os direitos reservados
+<br><br>
+os itens vendidos são fornecidos pela loja vizinha.
 </footer>
 
 <script>
 let carrinho = 0;
 
-function addCarrinho(){
+function comprar(produto, preco){
 carrinho++;
 document.getElementById("qtd").innerText = carrinho;
-alert("Produto adicionado ao carrinho!");
+
+let numero = "5535998911405";
+
+let mensagem = `Olá, quero comprar:\n${produto}\nPreço: R$ ${preco}`;
+
+let url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+
+window.open(url, "_blank");
 }
 
 function verCarrinho(){
 alert("Você tem " + carrinho + " produtos no carrinho.");
 }
+
+/* MENU */
+function abrirMenu(){
+document.getElementById("menu").classList.add("ativo");
+}
+
+function fecharMenu(){
+document.getElementById("menu").classList.remove("ativo");
+}
 </script>
 
 </body>
-  </html>
+</html>
